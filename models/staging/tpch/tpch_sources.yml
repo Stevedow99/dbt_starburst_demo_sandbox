@@ -216,10 +216,6 @@ sources:
             description: address of the supplier
           - name: s_nationkey
             description: Foreign Key to N_NATIONKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'nation')
-                  field: n_nationkey
           - name: s_phone
             description: phone number of the supplier
           - name: s_acctbal
