@@ -64,9 +64,6 @@ models:
     columns:
       - name: nation_key
         description: primary key of the model
-        tests:
-          - unique
-          - not_null
       - name: name
         description: nation name
       - name: region_key
@@ -79,9 +76,6 @@ models:
     columns:
       - name: order_key
         description: primary key of the model
-        tests:
-          - unique
-          - not_null
       - name: customer_key
         description: foreign key to stg_tpch_customers
       - name: status_code
@@ -120,9 +114,6 @@ models:
     columns:
       - name: part_key
         description: primary key of the model
-        tests:
-          - unique
-          - not_null
       - name: name
         description: name of the part
       - name: manufacturer

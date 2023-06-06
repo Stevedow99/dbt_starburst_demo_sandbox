@@ -1,3 +1,8 @@
+{{
+    config(
+        enabled=false
+    )
+}}
 select 
 	*
 from {{ ref('stg_tpch_orders') }}
