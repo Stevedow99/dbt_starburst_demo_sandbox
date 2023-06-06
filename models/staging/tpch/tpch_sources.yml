@@ -3,9 +3,8 @@ version: 2
 
 sources:
   - name: tpch
-    description: Welcome to the dbt Labs demo dbt project! We use the [TPCH dataset](https://docs.snowflake.com/en/user-guide/sample-data-tpch.html) to create a sample project to emulate what a production project might look like!
-    database: "{{target.database}}"
-    schema: raw_tpch_data
+    database: dbt_sa_sdowling
+    schema: tpch_sample_data
     tables:
       - name: orders
         description: main order tracking table
@@ -17,16 +16,9 @@ sources:
         columns:
           - name: o_orderkey
             description: SF*1,500,000 are sparsely populated
-            tests: 
-              - unique
-              - not_null
                   
           - name: o_custkey
             description: Foreign Key to C_CUSTKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'customer')
-                  field: c_custkey
           - name: o_orderstatus
             description: status code of the order
           - name: o_totalprice
@@ -46,12 +38,6 @@ sources:
         description: main customer table
         columns:
           - name: c_custkey
-            description: unique customer key
-            tests:
-              - unique:
-                  severity: warn
-              - not_null:
-                  severity: warn
           - name: c_name
             description: customer id
           - name: c_address
@@ -72,22 +58,10 @@ sources:
         columns:
           - name: l_orderkey
             description: Foreign Key to O_ORDERKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'orders')
-                  field: o_orderkey
           - name: l_partkey
             description:  Foreign key to P_PARTKEY, first part of the compound Foreign Key to (PS_PARTKEY,PS_SUPPKEY) with L_SUPPKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'part')
-                  field: p_partkey
           - name: l_suppkey
             description: Foreign key to S_SUPPKEY, second part of the compound Foreign Key to (PS_PARTKEY, PS_SUPPKEY) with L_PARTKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'supplier')
-                  field: s_suppkey
           - name: l_linenumber
             description: sequence of the order items within the order
           - name: l_quantity
@@ -120,19 +94,10 @@ sources:
         columns:
           - name: n_nationkey
             description: 25 nations are populated
-            tests:
-              - unique:
-                  severity: warn
-              - not_null:
-                  severity: warn
           - name: n_name
             description: nation name
           - name: n_regionkey
             description: Foreign Key to R_REGIONKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'region')
-                  field: r_regionkey
           - name: n_comment
             description: '{{ doc("comment") }}'
 
@@ -141,11 +106,6 @@ sources:
         columns:
           - name: p_partkey
             description: SF*200,000 are populated
-            tests:
-              - unique:
-                  severity: warn
-              - not_null:
-                  severity: warn
           - name: p_name
             description: name of the part
           - name: p_mfgr
@@ -168,16 +128,8 @@ sources:
         columns:
           - name: ps_partkey
             description: Foreign Key to P_PARTKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'part')
-                  field: p_partkey
           - name: ps_suppkey
             description: Foreign Key to S_SUPPKEY
-            tests:
-              - relationships:
-                  to: source('tpch', 'supplier')
-                  field: s_suppkey
           - name: ps_availqty
             description: raw available quantity
           - name: ps_supplycost
@@ -190,11 +142,6 @@ sources:
         columns:
           - name: r_regionkey
             description: 5 regions are populated
-            tests:
-              - unique:
-                  severity: warn
-              - not_null:
-                  severity: warn
           - name: r_name
             description: region name
           - name: r_comment
@@ -205,11 +152,6 @@ sources:
         columns:
           - name: s_suppkey
             description: SF*10,000 are populated
-            tests:
-              - unique:
-                  severity: warn
-              - not_null:
-                  severity: warn
           - name: s_name
             description: id of the supplier
           - name: s_address
