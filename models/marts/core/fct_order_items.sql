@@ -59,8 +59,8 @@ final as (
     from
         order_item
         inner join part_supplier
-            on order_item.part_key = part_supplier.part_key and
-                order_item.supplier_key = part_supplier.supplier_key
+            on order_item.part_key = CAST(part_supplier.part_key as integer)  and
+                order_item.supplier_key = CAST(part_supplier.supplier_key as integer)
         inner join dim_customers
             on order_item.customer_key = dim_customers.customer_key
 )

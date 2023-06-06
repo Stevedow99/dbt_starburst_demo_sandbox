@@ -53,6 +53,6 @@ select
 from
     orders
 inner join line_item
-        on orders.order_key = line_item.order_key
+        on CAST(orders.order_key AS integer) = line_item.order_key
 order by
     orders.order_date
