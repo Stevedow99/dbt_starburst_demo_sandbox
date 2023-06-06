@@ -7,9 +7,9 @@ with source as (
 renamed as (
 
     select
-        r_regionkey as region_key,
-        r_name as name,
-        r_comment as comment
+        regionkey as region_key,
+        name as name,
+        comment as comment
 
     from source
 
