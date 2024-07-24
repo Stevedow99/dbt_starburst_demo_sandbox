@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized='materialized_view',
+        properties = {
+        'view_security': "'invoker'"
+        }
+    )
+}}
+
 select
     date_trunc('day', date(order_date)) as order_month,
 
